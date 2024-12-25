@@ -1,4 +1,4 @@
 
-$.onInteract(player  => {
+$.onInteract(player => {
     $.setPlayerScript(player);
 })
