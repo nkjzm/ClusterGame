@@ -14,7 +14,11 @@ _.onReceive((messageType, arg, sender) => {
     }
 });
 
-_.playerLocalObject("playerLocalUI").findObject("jump").getUnityComponent("Button").onClick(isDown => {
+let jumpButton = _.playerLocalObject("playerLocalUI").findObject("jump").getUnityComponent("Button");
+let pinButton = _.playerLocalObject("playerLocalUI").findObject("pin").getUnityComponent("Button");
+let pinText = _.playerLocalObject("playerLocalUI").findObject("pin").getUnityComponent("Text");
+
+jumpButton.onClick(isDown => {
     if (isDown) {
         const pos = _.getPosition().add(new Vector3(0, 1, 0));
         _.setPosition(pos);
@@ -23,7 +27,9 @@ _.playerLocalObject("playerLocalUI").findObject("jump").getUnityComponent("Butto
     }
 });
 
-_.playerLocalObject("playerLocalUI").findObject("pin").getUnityComponent("Button").onClick(isDown => {
+let coolTime = 0;
+
+pinButton.onClick(isDown => {
     if (isDown) {
         const pos = _.getPosition();
         _.sendTo(_.sourceItemId, "fromPlayer", pos);
