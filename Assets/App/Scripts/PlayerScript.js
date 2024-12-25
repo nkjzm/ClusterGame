@@ -14,9 +14,18 @@ _.onReceive((messageType, arg, sender) => {
     }
 });
 
-_.playerLocalObject("test_button").getUnityComponent("Button").onClick(isDown => {
+_.playerLocalObject("playerLocalUI").findObject("jump").getUnityComponent("Button").onClick(isDown => {
     if (isDown) {
         const pos = _.getPosition().add(new Vector3(0, 1, 0));
         _.setPosition(pos);
+        _.setGravity(0)
+        _.setGravity(-9.81)
+    }
+});
+
+_.playerLocalObject("playerLocalUI").findObject("pin").getUnityComponent("Button").onClick(isDown => {
+    if (isDown) {
+        const pos = _.getPosition();
+        _.sendTo(_.sourceItemId, "fromPlayer", pos);
     }
 });

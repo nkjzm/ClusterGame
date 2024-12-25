@@ -144,11 +144,11 @@ interface ClusterScript {
    */
   readonly itemHandle: ItemHandle;
 
-   /**
-    * クラフトアイテムの元になっているアイテムテンプレートのIDです。
-    * ワールドアイテムの場合、この関数は`null`を返します。
-    * {@link ClusterScript.createItem}等で利用できます。
-    */
+  /**
+   * クラフトアイテムの元になっているアイテムテンプレートのIDです。
+   * ワールドアイテムの場合、この関数は`null`を返します。
+   * {@link ClusterScript.createItem}等で利用できます。
+   */
   readonly itemTemplateId: ItemTemplateId | null;
 
   /**
@@ -167,7 +167,7 @@ interface ClusterScript {
    * @param callback 
    */
   onStart(callback: () => void): void;
-  
+
   /**
    * updateループ毎に呼ばれるcallbackを登録します。
    * 
@@ -986,15 +986,15 @@ interface ClusterScript {
   // 外部通信
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   /**
-   * {@link ClusterScript.callExternal}が完了した場合に呼ばれるcallbackを登録します。
-   * callbackはcallExternalの成功時または失敗時に一回ずつ呼び出されます。
-   *
-   * スクリプトのトップレベルでの呼び出しのみサポートされます。
-   * トップレベルで複数回呼ばれた場合、最後の登録のみが有効です。
-   *
-   * @param callback response: 外部から取得したレスポンス。失敗した場合はnullです。 meta: callExternalの時に渡したものと同じ文字列です。errorReason: responseがnullの場合、失敗の理由。
-   */
+  /**
+  * {@link ClusterScript.callExternal}が完了した場合に呼ばれるcallbackを登録します。
+  * callbackはcallExternalの成功時または失敗時に一回ずつ呼び出されます。
+  *
+  * スクリプトのトップレベルでの呼び出しのみサポートされます。
+  * トップレベルで複数回呼ばれた場合、最後の登録のみが有効です。
+  *
+  * @param callback response: 外部から取得したレスポンス。失敗した場合はnullです。 meta: callExternalの時に渡したものと同じ文字列です。errorReason: responseがnullの場合、失敗の理由。
+  */
   onExternalCallEnd(callback: (response: string | null, meta: string, errorReason: string | null) => void): void;
 
   /**
@@ -1148,7 +1148,7 @@ interface ClusterScript {
    * @param type 
    * @returns 指定したコンポーネントが存在すればそのコンポーネントのハンドル、なければ`null`
    */
-  getUnityComponent(type: string) : UnityComponent | null;
+  getUnityComponent(type: string): UnityComponent | null;
 
   /**
    * このアイテムが置かれた空間がイベントかどうかを返します。
@@ -1397,35 +1397,35 @@ type ExtJSON<T> = { [key: string]: ExtJSON<T> } | ExtJSON<T>[] | number | string
  * @item
  */
 type SetHumanoidPoseOption = {
- /**
-  * HumanoidPoseで姿勢の上書きを反映するのにかける時間(秒)の設定値です。
-  * 上書きする姿勢への遷移中は、アバターの現在の姿勢と上書きする姿勢を時間によって線形補完した姿勢を設定します。
-  *
-  * 0以上の値を設定できます。
-  * 0より小さい値やNaNを設定した場合、0が設定されます。
-  * 未設定の場合、0として扱われます。
-  */
- transitionSeconds: number;
- /**
-  * 設定されたHumanoidPoseを解除するのにかける時間(秒)の設定値です。
-  * 姿勢の設定後、指定された秒数が経過したときに`setHumanoidPose`による姿勢の上書きを解除することができます。
-  *
-  * `transitionSeconds` 以上の値を設定できます。
-  * `transitionSeconds` より小さい値を設定した場合、`transitionSeconds` に設定されている値が設定されます。
-  * NaNを設定した場合、Infinityが設定されます。
-  * 未設定の場合、Infinityとして扱われます。
-  * Infinityが設定されている場合には時間経過での姿勢の解除は行われません。
-  */
- timeoutSeconds: number;
- /**
-  * `timeoutSeconds`で姿勢の上書きが解除される際、元の姿勢に戻るためにかける時間(秒)の設定値です。
-  * 元の姿勢への遷移中は、上書きされた姿勢と元の姿勢を時間によって線形補完した姿勢が反映されます。
-  * 
-  * 0以上の値を設定できます。
-  * 0より小さい値やNaNを設定した場合、0が設定されます。
-  * 未設定の場合、0として扱われます。
-  */
- timeoutTransitionSeconds: number
+  /**
+   * HumanoidPoseで姿勢の上書きを反映するのにかける時間(秒)の設定値です。
+   * 上書きする姿勢への遷移中は、アバターの現在の姿勢と上書きする姿勢を時間によって線形補完した姿勢を設定します。
+   *
+   * 0以上の値を設定できます。
+   * 0より小さい値やNaNを設定した場合、0が設定されます。
+   * 未設定の場合、0として扱われます。
+   */
+  transitionSeconds: number;
+  /**
+   * 設定されたHumanoidPoseを解除するのにかける時間(秒)の設定値です。
+   * 姿勢の設定後、指定された秒数が経過したときに`setHumanoidPose`による姿勢の上書きを解除することができます。
+   *
+   * `transitionSeconds` 以上の値を設定できます。
+   * `transitionSeconds` より小さい値を設定した場合、`transitionSeconds` に設定されている値が設定されます。
+   * NaNを設定した場合、Infinityが設定されます。
+   * 未設定の場合、Infinityとして扱われます。
+   * Infinityが設定されている場合には時間経過での姿勢の解除は行われません。
+   */
+  timeoutSeconds: number;
+  /**
+   * `timeoutSeconds`で姿勢の上書きが解除される際、元の姿勢に戻るためにかける時間(秒)の設定値です。
+   * 元の姿勢への遷移中は、上書きされた姿勢と元の姿勢を時間によって線形補完した姿勢が反映されます。
+   * 
+   * 0以上の値を設定できます。
+   * 0より小さい値やNaNを設定した場合、0が設定されます。
+   * 未設定の場合、0として扱われます。
+   */
+  timeoutTransitionSeconds: number
 }
 
 /**
@@ -1628,7 +1628,7 @@ interface SubNode {
    * @param type 
    * @returns 指定したコンポーネントが存在すればそのコンポーネントのハンドル、なければ`null`
    */
-  getUnityComponent(type: string) : UnityComponent | null;
+  getUnityComponent(type: string): UnityComponent | null;
 }
 
 /**
@@ -3229,7 +3229,7 @@ declare class Color {
    * RGB成分を指定してインスタンスを生成します。 `a` の値は1として初期化されます。
    */
   constructor(r: number, g: number, b: number);
-  
+
   /** 
    * RGBA成分を指定してインスタンスを生成します。
    */
@@ -4444,7 +4444,7 @@ interface PlayerScript {
    *
    * @param iconId アイコン画像のid
    */
-  iconAsset(iconId: string) : IconAsset;
+  iconAsset(iconId: string): IconAsset;
 
   /**
    * @beta
@@ -4480,7 +4480,7 @@ interface PlayerScript {
    * @param index ボタンの番号で、0,1,2,3のいずれか。この範囲外の値を指定するとエラーになります
    * @param icon 表示するアイコン画像。無効なアイコンを指定した場合、アイコンが未指定なものとして扱われます。
    */
-  showButton(index: number, icon: IconAsset) : void;
+  showButton(index: number, icon: IconAsset): void;
 
   /**
    * @beta
@@ -4492,7 +4492,7 @@ interface PlayerScript {
    *
    * @param index ボタンの番号で、0,1,2,3のいずれか。この範囲外の値を指定するとエラーになります
    */
-  hideButton(index: number) : void;
+  hideButton(index: number): void;
 
   /**
    * @beta
@@ -4528,7 +4528,7 @@ interface PlayerScript {
    *
    * @returns プレイヤーの現在の位置
    */
-  getPosition() : Vector3 | null;
+  getPosition(): Vector3 | null;
 
   /**
    * プレイヤーの現在の方向をグローバル座標で取得します。
@@ -4539,7 +4539,7 @@ interface PlayerScript {
    *
    * @returns プレイヤーの現在の方向
    */
-  getRotation() : Quaternion | null;
+  getRotation(): Quaternion | null;
 
   /**
    * プレイヤーの位置をグローバル座標で設定します。
@@ -5233,7 +5233,7 @@ interface PlayerLocalObject {
    * @param type 
    * @returns 指定したコンポーネントが存在すればそのコンポーネントのハンドル、なければ`null`
    */
-  getUnityComponent(type: string) : UnityComponent | null;
+  getUnityComponent(type: string): UnityComponent | null;
 }
 
 /**
@@ -5282,7 +5282,7 @@ interface PlayerLocalObject {
  * - "VideoPlayer"
  * 
  */
-interface UnityComponent { 
+interface UnityComponent {
 
   /**
    * Unityコンポーネントのプロパティを取得、または設定するためのハンドルを取得します。
@@ -5516,7 +5516,7 @@ interface UnityComponent {
    *   - waitForFirstFrame
    * 
    */
-  readonly unityProp : UnityComponentPropertyProxy;
+  readonly unityProp: UnityComponentPropertyProxy;
 
   /** 
    * @beta
@@ -5694,11 +5694,11 @@ interface GiftInfo {
    * 贈られたギフトの価格を、クラスターコインの整数値として取得します。
    */
   readonly price: number;
- 
+
   /**
    * ギフトが贈られた時刻(UTC)を、unix epochからの経過時刻でミリ秒単位の値として取得します。
    */
-  readonly timestamp: number;  
+  readonly timestamp: number;
 
   /**
    * ギフトの種類が識別できる文字列を取得します。形状が同じでも、色が異なるギフトでは異なる値を返します。
