@@ -7,12 +7,22 @@ if (storageData !== null) {
 }
 
 _.onReceive((messageType, arg, sender) => {
-    if (messageType === "testType") {
-        level += 1;
-        _.setPlayerStorageData({ level });
-        _.log("level: " + level)
+    switch (messageType) {
+        case "testType":
+            level += 1;
+            _.setPlayerStorageData({ level });
+            _.log("level: " + level)
+            break;
+        case "onUpdate":
+            onUpdate(arg);
+            break;
     }
 });
+
+function onUpdate(deltaTime) {
+    _.log("onUpdate: " + deltaTime);
+}
+
 
 let jumpButton = _.playerLocalObject("playerLocalUI").findObject("jump").getUnityComponent("Button");
 let pinButton = _.playerLocalObject("playerLocalUI").findObject("pin").getUnityComponent("Button");
@@ -22,8 +32,6 @@ jumpButton.onClick(isDown => {
     if (isDown) {
         const pos = _.getPosition().add(new Vector3(0, 1, 0));
         _.setPosition(pos);
-        _.setGravity(0)
-        _.setGravity(-9.81)
     }
 });
 
